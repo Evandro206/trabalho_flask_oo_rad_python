@@ -1,4 +1,4 @@
-from src.orientacao_objetos.cliente_conta import ClienteConta
+from src.backend.cliente_conta import ClienteConta
 
 class ContaEncapsulada:
 

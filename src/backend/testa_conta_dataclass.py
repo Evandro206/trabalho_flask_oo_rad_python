@@ -1,4 +1,4 @@
-from src.orientacao_objetos.conta_dataclass import ContaDataClass
+from src.backend.conta_dataclass import ContaDataClass
 
 
 class TestaContaDataClass:

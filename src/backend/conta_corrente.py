@@ -1,4 +1,4 @@
-from src.orientacao_objetos.conta import Conta
+from src.backend.conta import Conta
 
 
 class ContaCorrente(Conta):

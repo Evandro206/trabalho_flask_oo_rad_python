@@ -27,7 +27,7 @@ class Funcionario(ABC):
 
 
 class Analista(Funcionario):
-
+    pass
 
 class Supervisor(Funcionario):
     pass

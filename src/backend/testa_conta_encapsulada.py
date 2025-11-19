@@ -1,4 +1,4 @@
-from src.orientacao_objetos.conta_encpasulada import ContaEncapsulada as Conta
+from src.backend.conta_encpasulada import ContaEncapsulada as Conta
 
 
 class TestaContaEncapsulada:
