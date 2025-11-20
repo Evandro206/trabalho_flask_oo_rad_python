@@ -1,22 +1,22 @@
 {% extends 'base.html' %} {% block content %}
 <div>
-  <div class="text-center">
+
+  <div class="d-flex flex-column gap-3 align-items-center justify-items-center my-4">
+    
     <h2>Qual tipo de operação deseja deseja realizar?</h2>
     <form action="{{ url_for('depositar')}}">
       <button type="submit" class="btn btn-primary btn-lg" style="color: #ffffff; background-color: #004bbbd3; ">Depositar</button>
     </form>
-  </div>
 
-  <div class="text-center">
     <form action="{{ url_for('sacar')}}">
       <button type="submit" class="btn btn-primary btn-lg" style="color: #ffffff; background-color: #008300bb; ">Sacar</button>
     </form>
-  </div>
 
-  <div class="text-center">
     <form action="{{ url_for('main')}}">
       <button type="submit" class="btn btn-primary btn-lg" style="color: #ffffff; background-color: #a50000d3; ">Voltar</button>
     </form>
+
   </div>
+
 </div>
 {% endblock %}
