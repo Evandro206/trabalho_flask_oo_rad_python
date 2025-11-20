@@ -11,19 +11,25 @@
     <header>
     </header>
     <div>
-        <h1>Consulta de Saldo</h1>
-        <p>
-            <label> Nome de usúario:</label>
-        </p>
-        <p>
-            <label> Nùmero da Agênica:</label>
-        </p>
-        <p>
-            <label>Número da Conta:</label>
-        </p>
-        <p>
-            <label>Saldo atual:</label>
-        </p>
+        <form method="POST" action="{{ url_for('saldo') }}">
+            <label for="cpf">Digite o Cpf</label>
+            <input type="text" id="cpf" name="cpf" required>
+            <button onclick="submit">Consulta o saldo da conta</button>
+        </form>{% if cpf %}
+    {% set ns = namespace(encontrada=false) %} 
+    
+    {% for conta in contas %}
+        {% if conta.titular.cpf == cpf %}
+            <p>O saldo da conta {{ conta.numero }} é: {{ conta.saldo }}</p>
+            
+            {% set ns.encontrada = true %} 
+        {% endif %}
+    {% endfor %}
+
+    {% if not ns.encontrada %}
+        <p>Conta não encontrada, verifique o cpf digitado e tente novamente</p>
+    {% endif %}
+{% endif %}
         <form action="{{ url_for('main')}}">
             <button type="submit">Voltar</button>
         </form>

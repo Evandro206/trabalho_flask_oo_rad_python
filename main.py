@@ -22,9 +22,6 @@ def main():
     return render_template(template_name_or_list='home.html')
 
 
-@app.route('/consulta_saldo')
-def consulta_saldo():
-    return render_template(template_name_or_list='consultaSaldo.html')
 
 @app.route('/movimentar')
 def movimentar():
@@ -34,9 +31,14 @@ def movimentar():
 def cadastro():
     return render_template(template_name_or_list='cadastro.html')
 
-@app.route('/saldo')
+# ...existing code...
+@app.route('/saldo', methods=['GET', 'POST'])
 def saldo():
-    return render_template(template_name_or_list='saldo.html')
+    cpf = None
+    if request.method == 'POST':
+        cpf = request.form.get('cpf')
+    return render_template(template_name_or_list='saldo.html', contas=contas, cpf=cpf)
+# ...existing code...
 
 @app.route('/depositar')
 def depositar():
@@ -79,6 +81,10 @@ def escolherConta():
         print(conta.titular.nome)
         print(type(conta))
     return render_template(template_name_or_list='home.html')
+
+@app.route('/exibirTudo')
+def exibirTudo():
+    return render_template(template_name_or_list='exibirTudo.html', contas=contas)
 
     
 
