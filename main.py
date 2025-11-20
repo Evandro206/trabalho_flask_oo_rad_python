@@ -17,7 +17,7 @@ contas = [ContaCorrente(clientes[0]),
               ContaSalario(clientes[2]),
               ContaCorrente(clientes[3])]
 
-@app.route('/')
+@app.route('/home')
 def main():
     return render_template(template_name_or_list='home.html')
 
