@@ -41,7 +41,7 @@ def saldo():
                 if conta.titular.cpf == cpf:
                     conteudo_html = f'<p>O saldo da conta { conta.numero } é: { conta.saldo }</p>'
                     return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
-            conteudo_html = '<p>Conta não encontrada, verifique o cpf digitado e tente novamente</p>'
+            conteudo_html = '<p>CPF informado Inválido! Verifique o CPF informado e tente novamente.</p>'
             return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
     return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
 

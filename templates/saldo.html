@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends 'base.html' %} {% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConsultaSaldo</title>
-</head>
-
-<body>
-    <div>
+<div class="text-center">
+    <p>
         <form method="POST" action="{{ url_for('saldo') }}">
-            <label for="cpf">Digite o Cpf</label>
+            <label for="cpf">Digite seu CPF</label>
             <input type="text" id="cpf" name="cpf" required>
-            <button onclick="submit">Consulta o saldo da conta</button>
+            <button onclick="bsubmit" class="btn btn-outline-primary">Consultar Saldo da Conta.</button>
         </form>
+    </p>
+    
+    <div class="text-center">
+        <p>
         <form action="{{ url_for('main')}}">
-            <button type="submit">Voltar</button>
+            <button type="submit" class="btn btn-outline-danger">Voltar</button>
         </form>
-        {{ conteudo | safe }}
+        </p>
     </div>
-</body>
+        {{ conteudo | safe }}
+</div>
 
-</html>
+{% endblock %}
