@@ -3,8 +3,6 @@ from src.backend.Conta_abs import Conta
 
 class ContaSalario(Conta):
 
-    def __init__(self, numero, titular, saldo = 0):
-        super().__init__(numero, titular, saldo)
 
     def sacar(self, valor):
         if self.saldo < valor:
