@@ -31,14 +31,19 @@ def movimentar():
 def cadastro():
     return render_template(template_name_or_list='cadastro.html')
 
-# ...existing code...
 @app.route('/saldo', methods=['GET', 'POST'])
 def saldo():
-    cpf = None
+    conteudo_html = ""
     if request.method == 'POST':
         cpf = request.form.get('cpf')
-    return render_template(template_name_or_list='saldo.html', contas=contas, cpf=cpf)
-# ...existing code...
+        if cpf:
+            for conta in contas:
+                if conta.titular.cpf == cpf:
+                    conteudo_html = f'<p>O saldo da conta { conta.numero } é: { conta.saldo }</p>'
+                    return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
+            conteudo_html = '<p>Conta não encontrada, verifique o cpf digitado e tente novamente</p>'
+            return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
+    return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
 
 @app.route('/depositar')
 def depositar():
@@ -54,10 +59,6 @@ def cadastrar_cliente():
     cpf = request.form['cpf']
     tempCliente = Cliente(nome, cpf)
     clientes.append(tempCliente)
-#Teste
-    for cliente in clientes:
-        print(cliente.nome)
-        print(cliente.cpf)
     return redirect(url_for('criarConta'))
 
 @app.route('/criarConta')
@@ -74,19 +75,12 @@ def escolherConta():
             nova_conta = ContaPoupanca(clientes[-1])
         case 'salario':
             nova_conta = ContaSalario(clientes[-1])
-#Teste
     contas.append(nova_conta)
-    for conta in contas:
-        print(conta.numero)
-        print(conta.titular.nome)
-        print(type(conta))
     return render_template(template_name_or_list='home.html')
 
 @app.route('/exibirTudo')
 def exibirTudo():
     return render_template(template_name_or_list='exibirTudo.html', contas=contas)
-
-    
 
 if __name__ == "__main__":
     app.run(debug=True)
