@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>
+            <h2>Qual tipo de operação deseja realizar?</h2>
+            <form action="{{ url_for('depositar')}}">
+                <button type="submit">Depositar</button>
+            </form>
+            <form action="{{ url_for('sacar')}}">
+                <button type="submit">Sacar</button>
+            </form>
+        </h1>
+        <form action="{{ url_for('main')}}">
+            <button type="submit">Voltar</button>
+        </form>
+    </div>
+    </form>
+
+</body>
+
+</html>

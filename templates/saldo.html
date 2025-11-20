@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConsultaSaldo</title>
 </head>
+
 <body>
     <header>
     </header>
     <div>
         <h1>Consulta de Saldo</h1>
-        <p><label> Nome de usúario:</label></p>
-        <p><label> Nùmero da Agênica:</label></p>
-        <p><label>Número da Conta:</label></p>
-        <p><label>Saldo atual:</label></p>
-        <button>Voltar</button>
+        <p>
+            <label> Nome de usúario:</label>
+        </p>
+        <p>
+            <label> Nùmero da Agênica:</label>
+        </p>
+        <p>
+            <label>Número da Conta:</label>
+        </p>
+        <p>
+            <label>Saldo atual:</label>
+        </p>
+        <form action="{{ url_for('main')}}">
+            <button type="submit">Voltar</button>
+        </form>
     </div>
     </header>
-    
+
 </body>
+
 </html>
