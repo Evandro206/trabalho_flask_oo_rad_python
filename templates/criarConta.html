@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+      <form action="{{ url_for('escolherConta')}}" method="POST">      
+        <fieldset>
+          <div class="form-group">
+            <label for="nome">tipo de conta</label>
+            <select id="tipo" name="tipo" class="form-control">
+              <option value="" disabled selected>Selecione o tipo de conta</option>
+              <option value="corrente">Conta corrente</option>
+              <option value="poupanca">Poupança</option>
+              <option value="salario">Salário</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+        </fieldset>
+      </form>
+        <form action="{{ url_for('main')}}">
+            <button type="submit">Voltar</button>
+        </form>
+    </div>
+    </header>
+
+</body>
+
+</html>
