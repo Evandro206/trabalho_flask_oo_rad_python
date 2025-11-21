@@ -17,7 +17,7 @@ contas = [ContaCorrente(clientes[0]),
               ContaSalario(clientes[2]),
               ContaCorrente(clientes[3])]
 
-@app.route('/home')
+@app.route('/')
 def main():
     return render_template(template_name_or_list='home.html')
 
@@ -39,7 +39,7 @@ def saldo():
         if cpf:
             for conta in contas:
                 if conta.titular.cpf == cpf:
-                    conteudo_html = f'<p>O saldo da conta { conta.numero } é: { conta.saldo }</p>'
+                    conteudo_html = f'<p>O saldo da conta numero { conta.numero } do titular {conta.titular.nome} é: { conta.saldo }</p>'
                     return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
             conteudo_html = '<p>CPF informado Inválido! Verifique o CPF informado e tente novamente.</p>'
             return render_template(template_name_or_list='saldo.html', conteudo=conteudo_html)
@@ -76,11 +76,42 @@ def escolherConta():
         case 'salario':
             nova_conta = ContaSalario(clientes[-1])
     contas.append(nova_conta)
-    return render_template(template_name_or_list='home.html')
+    conteudo_html = f'<p>Conta {tipo} criada com sucesso para o cliente {clientes[-1].nome} do CPF {clientes[-1].cpf}!</p><p>Número da conta: {nova_conta.numero}</p><p>Saldo inicial: {nova_conta.saldo}</p>'
+    return render_template(template_name_or_list='home.html', conteudo=conteudo_html)
 
 @app.route('/exibirTudo')
 def exibirTudo():
     return render_template(template_name_or_list='exibirTudo.html', contas=contas)
+
+@app.route('/deposito', methods=['POST'])
+def deposito():
+    conteudo_html = ""
+    cpf = request.form['cpf']
+    valor = float(request.form['valor'])
+    for conta in contas:
+        if conta.titular.cpf == cpf:
+            conta.depositar(valor)
+            conteudo_html = f'<p>Depósito de {valor} realizado com sucesso na conta {conta.numero} do titular {conta.titular.nome}!</p><p> Saldo atual: {conta.saldo}</p>'
+            return render_template(template_name_or_list='depositar.html',conteudo = conteudo_html)
+    conteudo_html = '<p>CPF informado Inválido! Verifique o CPF informado e tente novamente.</p>'
+    return render_template(template_name_or_list='depositar.html',conteudo = conteudo_html)
+
+@app.route('/saque', methods=['POST'])
+def saque():
+    conteudo_html = ""
+    cpf = request.form['cpf']
+    valor = float(request.form['valor'])
+    for conta in contas:
+        if conta.titular.cpf == cpf:
+            retornado = conta.sacar(valor)
+            if retornado is None:
+                conteudo_html = f'<p>Saldo insuficiente para saque de {valor} na conta {conta.numero} do titular {conta.titular.nome}!</p><p> Saldo atual: {conta.saldo}</p>'
+                return render_template(template_name_or_list='sacar.html',conteudo = conteudo_html)
+            conteudo_html = f'<p>Depósito de {valor} realizado com sucesso na conta {conta.numero} do titular {conta.titular.nome}!</p><p> Saldo atual: {conta.saldo}</p>'
+            return render_template(template_name_or_list='sacar.html',conteudo = conteudo_html)
+    conteudo_html = '<p>CPF informado Inválido! Verifique o CPF informado e tente novamente.</p>'
+    return render_template(template_name_or_list='sacar.html',conteudo = conteudo_html)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

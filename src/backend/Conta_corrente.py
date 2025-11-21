@@ -6,8 +6,7 @@ class ContaCorrente(Conta):
     def sacar(self, valor):
         if self.saldo < valor:
             return None
-        else:
-            self.saldo -= valor + 10.00
+        self.saldo -= valor + 10.00
         return self.saldo
 
     def depositar(self, valor):

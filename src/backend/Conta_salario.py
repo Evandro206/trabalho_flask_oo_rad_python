@@ -7,8 +7,7 @@ class ContaSalario(Conta):
     def sacar(self, valor):
         if self.saldo < valor:
             return None
-        else:
-            self.saldo -= valor 
+        self.saldo -= valor 
         return self.saldo
 
     def depositar(self, valor):
